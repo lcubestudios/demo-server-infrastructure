@@ -36,10 +36,12 @@ pipeline {
                 }
             }        
         }
-        stage('SSH') {
+        stage('DockerInServer') {
             steps{
-                echo 'command with ssh-not working'
-                //sh "ssh root@45.79.139.42 '/home/messaging_backend/staging/script.sh'"
+                echo 'running command for containers in the Server'
+                script {
+                    gv.dockerimages()
+                }  
             }        
         }
     }

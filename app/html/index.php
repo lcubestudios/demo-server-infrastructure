@@ -1,5 +1,5 @@
 <?php
-echo ("Hello!");
+echo ("Welcome to DENNYS LAND! Now you're my BITCH!!");
 
 ##COMPOSER NEEDED!##
 require_once realpath(__DIR__ . '/vendor/autoload.php');

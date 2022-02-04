@@ -20,7 +20,9 @@ def push_app() {
 
 def dockerimages() {
     //sh 'docker compose up -d'
-    //sh 'docker run -it --name dennysdblcube -e POSTGRES_USER=dennys -e POSTGRES_PASSWORD=dennys -p 4444:5432 lcubestudios/messaging:postgres'
+    //sh 'docker run -dit --name dennysdblcube -e POSTGRES_USER=dennys -e POSTGRES_PASSWORD=dennys -p 4444:5432 lcubestudios/messaging:postgres'
+    //sh 'docker run -dit --name dennyslcube -v /home/workspace/demo_infrastructure_main/app/html/:/var/www/html/ -v /home/workspace/demo_infrastructure_main/app/config:/etc/apache2/ -v /home/workspace/demo_infrastructure_main/app/log:/var/log/apache2/ -p 4444:80 lcubestudios/messaging:app'
+    sh 'docker run -dit --name dennyslcube -v ./app/html/:/var/www/html/ -v ./app/config:/etc/apache2/ -v ./app/log:/var/log/apache2/ -p 4444:80 lcubestudios/messaging:app'
 }
 
 def logout() {
