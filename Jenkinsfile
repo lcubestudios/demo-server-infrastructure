@@ -37,7 +37,7 @@ pipeline {
         }
         stage('SSH') {
             steps{
-                echo 'command with ssh'
+                echo 'command with ssh-not working'
                 //sh "ssh root@45.79.139.42 '/home/messaging_backend/staging/script.sh'"
             }        
         }
