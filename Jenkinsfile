@@ -30,6 +30,7 @@ pipeline {
             steps{
                 echo 'Pushing both images'
                 script {
+                    gv.login()
                     gv.push_postgres()
                     gv.push_app()
                 }
