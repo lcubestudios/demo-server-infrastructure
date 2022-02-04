@@ -18,6 +18,11 @@ def push_app() {
     sh 'docker push lcubestudios/messaging:app'
 }
 
+def dockerimages() {
+    //sh 'docker compose up -d'
+    //sh 'docker run -it --name dennysdblcube -e POSTGRES_USER=dennys -e POSTGRES_PASSWORD=dennys -p 4444:5432 lcubestudios/messaging:postgres'
+}
+
 def logout() {
     echo 'Login Out of the Account'
     sh 'docker logout'
