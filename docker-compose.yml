@@ -1,0 +1,65 @@
+version: '3.9'
+services:
+    app:
+      image: app
+      container_name: app
+      build:
+        context: .
+      volumes:
+        - ./app/html:/var/www/html
+        - ./app/config:/etc/apache2
+        - ./app/log:/var/log/apache2
+      ports:
+        - "8000:80"
+      depends_on:
+        - db_post
+
+    db_post:
+      image: postgres
+      container_name: ${DB_CONTAINER_NAME_PS}
+      build:
+        context: postgres
+      ports:
+        - "${DB_PORT_PS}:5432"
+      restart: always
+      environment:
+        - POSTGRES_USER=${DB_USER_PS}
+        - POSTGRES_PASSWORD=${DB_PASSWORD_PS}
+      volumes:
+        - ./pgdata:/var/lib/postgresql/data
+    
+    pgadmin:
+      container_name: ${PGA_CONTAINER_NAME}
+      image: bitnami/phppgadmin
+      environment:
+        - DATABASE_HOST=db
+      ports: 
+        - "${PGA_HTTP_PORT}:8080"
+        - "${PGA_HTTPS_PORT}:8143"
+      depends_on:
+        - db_post
+    
+#    db_mysql:
+#      image: mysql
+#      container_name: ${DB_CONTAINER_NAME_MS}
+#      build: 
+#        context: mysql
+#      command: --default-authentication-plugin=mysql_native_password
+#      restart: always
+#      environment:
+#        MYSQL_USER: ${DB_USER_MS}
+#        MYSQL_PASSWORD: ${DB_PASSWORD_MS}
+#        MYSQL_DATABASE: ${DB_NAME_MS}
+#      ports:
+#        - "${DB_PORT_MS}:3306"
+
+#    phpadmin:
+#      image: phpmyadmin
+#      container_name: ${PMA_CONTAINER_NAME}
+#      restart: always
+#      ports:
+#        - ${PMA_HTTP_PORT}:80
+#      environment:
+#        - PMA_ARBITRARY=1
+#      depends_on:
+#        - db_mysql
