@@ -21,8 +21,8 @@ pipeline {
             steps{
                 echo "Building images"
                 script {
-                    gv.build_postgres()
-                    gv.build_app()
+                    //gv.build_postgres()
+                    //gv.build_app()
                 }
             }        
         }
@@ -30,9 +30,9 @@ pipeline {
             steps{
                 echo 'Pushing both images'
                 script {
-                    gv.login()
-                    gv.push_postgres()
-                    gv.push_app()
+                    //gv.login()
+                    //gv.push_postgres()
+                    //gv.push_app()
                 }
             }        
         }
@@ -40,7 +40,7 @@ pipeline {
             steps{
                 echo 'running command for containers in the Server'
                 script {
-                    gv.dockerimages()
+                    //gv.dockerimages()
                 }  
             }        
         }
@@ -48,7 +48,7 @@ pipeline {
     post {
         always{
             echo 'Login Out of the Account'
-            sh 'docker logout'
+            //sh 'docker logout'
         }
     }
 }
