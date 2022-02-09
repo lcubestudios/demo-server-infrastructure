@@ -12,9 +12,9 @@ services:
       ports:
         - "${APP_PORT}:80"
       depends_on:
-        - db_post
+        - postgres
 
-    db_post:
+    postgres:
       image: postgres
       container_name: ${DB_CONTAINER_NAME_PS}
       build:
@@ -26,18 +26,18 @@ services:
         - POSTGRES_USER=${DB_USER_PS}
         - POSTGRES_PASSWORD=${DB_PASSWORD_PS}
       volumes:
-        - ./pgdata:/var/lib/postgresql/data
+        - ./postgres/pgdata:/var/lib/postgresql/data
     
     pgadmin:
       container_name: ${PGA_CONTAINER_NAME}
       image: bitnami/phppgadmin
       environment:
-        - DATABASE_HOST=db
+        - DATABASE_HOST=postgres
       ports: 
         - "${PGA_HTTP_PORT}:8080"
-        - "${PGA_HTTPS_PORT}:8143"
+      #  - "${PGA_HTTPS_PORT}:8143"
       depends_on:
-        - db_post
+        - postgres
     
 #    db_mysql:
 #      image: mysql
@@ -52,6 +52,8 @@ services:
 #        MYSQL_DATABASE: ${DB_NAME_MS}
 #      ports:
 #        - "${DB_PORT_MS}:3306"
+#      volumes:
+#        - ./mysql/mydata:/var/lib/mysql
 
 #    phpadmin:
 #      image: phpmyadmin
@@ -63,3 +65,7 @@ services:
 #        - PMA_ARBITRARY=1
 #      depends_on:
 #        - db_mysql
+
+volumes:
+  #mysql/mydata: {}
+  postgres/pgdata: {}
