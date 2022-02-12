@@ -1,71 +1,57 @@
 version: '3.9'
 services:
-    app:
-      image: app
+    apache:
+      image: lcubestudios/apache2
       container_name: ${APP_CONTAINER_NAME}
       build:
-        context: .
+        context: apache2
       volumes:
-        - ./app/html:/var/www/html
-        - ./app/config:/etc/apache2
-        - ./app/log:/var/log/apache2
+        - ./apache2:/var/www/html
       ports:
         - "${APP_PORT}:80"
-      depends_on:
-        - postgres
 
     postgres:
-      image: postgres
-      container_name: ${DB_CONTAINER_NAME_PS}
+      image: lcubestudios/postgres
+      container_name: ${PS_DB_CONTAINER_NAME}
       build:
         context: postgres
       ports:
-        - "${DB_PORT_PS}:5432"
+        - "${PS_DB_PORT}:5432"
       restart: always
       environment:
-        - POSTGRES_USER=${DB_USER_PS}
-        - POSTGRES_PASSWORD=${DB_PASSWORD_PS}
+        - POSTGRES_USER=${PS_DB_USER}
+        - POSTGRES_PASSWORD=${PS_DB_PASSWORD}
       volumes:
         - ./postgres/pgdata:/var/lib/postgresql/data
     
-    pgadmin:
+    phppgadmin:
       container_name: ${PGA_CONTAINER_NAME}
       image: bitnami/phppgadmin
       environment:
         - DATABASE_HOST=postgres
       ports: 
         - "${PGA_HTTP_PORT}:8080"
-      #  - "${PGA_HTTPS_PORT}:8143"
       depends_on:
         - postgres
     
-#    db_mysql:
-#      image: mysql
-#      container_name: ${DB_CONTAINER_NAME_MS}
-#      build: 
-#        context: mysql
-#      command: --default-authentication-plugin=mysql_native_password
-#      restart: always
-#      environment:
-#        MYSQL_USER: ${DB_USER_MS}
-#        MYSQL_PASSWORD: ${DB_PASSWORD_MS}
-#        MYSQL_DATABASE: ${DB_NAME_MS}
-#      ports:
-#        - "${DB_PORT_MS}:3306"
-#      volumes:
-#        - ./mysql/mydata:/var/lib/mysql
+    mysql:
+      image: mysql
+      container_name: ${MS_DB_CONTAINER_NAME}
+      restart: always
+      environment:
+        MYSQL_USER: ${MS_DB_USER}
+        MYSQL_PASSWORD: ${MS_DB_PASSWORD}
+        MYSQL_DATABASE: ${MS_DB_NAME}
+      ports:
+        - "${MS_DB_PORT}:3306"
+      volumes:
+        - ./mysql/:/var/lib/mysql
 
-#    phpadmin:
-#      image: phpmyadmin
-#      container_name: ${PMA_CONTAINER_NAME}
-#      restart: always
-#      ports:
-#        - ${PMA_HTTP_PORT}:80
-#      environment:
-#        - PMA_ARBITRARY=1
-#      depends_on:
-#        - db_mysql
-
-#volumes:
-  #mysql/mydata: {}
-#  postgres/pgdata: {}
+    phpmyadmin:
+      image: phpmyadmin
+      container_name: ${PMA_CONTAINER_NAME}
+      restart: always
+      ports:
+        - ${PMA_HTTP_PORT}:80
+      depends_on:
+        - mysql
