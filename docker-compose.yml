@@ -11,10 +11,10 @@ services:
         - "${APP_PORT}:80"
 
     postgres:
-      image: lcubestudios/postgres
+      image: postgres:latest
       container_name: ${PS_DB_CONTAINER_NAME}
-      build:
-        context: postgres
+      #build:
+      #  context: postgres
       ports:
         - "${PS_DB_PORT}:5432"
       restart: always
@@ -35,7 +35,7 @@ services:
         - postgres
     
     # mysql:
-    #   image: mysql
+    #   image: mysql:latest
     #   container_name: ${MS_DB_CONTAINER_NAME}
     #   restart: always
     #   environment:
