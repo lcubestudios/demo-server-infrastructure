@@ -11,18 +11,18 @@ pipeline {
     stages {
         stage('Init') {
             steps{
-                echo "docker compose up -d"
+                sh "docker compose up -d"
                
             }        
         }
         stage('Build') {
             steps{
-                echo "docker compose down"
+                sh "docker compose down"
             }        
         }
         stage('Jenkins') {
             steps{
-                echo 'docker compose up -d --build' 
+                sh 'docker compose up -d --build' 
             }        
         }
     }
