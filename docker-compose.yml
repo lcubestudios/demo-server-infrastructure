@@ -7,6 +7,7 @@ services:
         context: apache2
       volumes:
         - ./apache2:/var/www/html
+        - ./apache2/000-defaul.conf:/etc/apache2/sites-available/000-defaul.conf
       ports:
         - "${APP_PORT}:80"
 
