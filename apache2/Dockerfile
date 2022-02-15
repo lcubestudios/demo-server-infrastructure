@@ -23,4 +23,6 @@ RUN apt install -y libapache2-mod-php openssl php-imagick php-common php-curl ph
 RUN a2enmod cgi
 RUN pip3 install psycopg2-binary
 
+COPY 000-default.conf /etc/apache2/sites-enable/000-default.conf
+
 EXPOSE 80
