@@ -5,7 +5,7 @@ RUN apt-get -y upgrade
 ENV MAIN_DIR=/var/www/html
 WORKDIR ${MAIN_DIR}
 
-RUN apt-get install -y git
+RUN apt-get install -y git nano
 RUN apt-get install -y ca-certificates \
   && apt-get install -y curl gnupg build-essential \
   && curl --silent --location https://deb.nodesource.com/setup_14.x | bash - \
@@ -23,6 +23,6 @@ RUN apt install -y libapache2-mod-php openssl php-imagick php-common php-curl ph
 RUN a2enmod cgi
 RUN pip3 install psycopg2-binary
 
-COPY 000-default.conf /etc/apache2/sites-enable/000-default.conf
+COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
 
 EXPOSE 80

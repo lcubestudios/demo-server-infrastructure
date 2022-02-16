@@ -9,7 +9,7 @@ services:
         - ./apache2:/var/www/html
       ports:
         - "${APP_PORT}:80"
-    #p
+    
     postgres:
       image: postgres:latest
       container_name: ${PS_DB_CONTAINER_NAME}
