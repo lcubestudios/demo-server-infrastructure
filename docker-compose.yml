@@ -8,7 +8,7 @@ services:
       volumes:
         - ./apache2:/var/www/html
       ports:
-        - "${APP_PORT}:80"
+        #- "${APP_PORT}:80"
         - "${APP_SSL_PORT}:443"
     
     postgres:
