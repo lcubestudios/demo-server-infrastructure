@@ -25,8 +25,8 @@ RUN pip3 install psycopg2-binary
 
 COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
 
-RUN apt install certbot python3-certbot-apache -y 
-RUN certonly -a standalone  --agree-tos  --non-interactive --dry-run --email luismunoz@lcubestudios.io --domains "demo.lcubestudios.io" 
+#RUN apt install certbot python3-certbot-apache -y 
+#RUN certonly -a standalone  --agree-tos  --non-interactive --dry-run --email luismunoz@lcubestudios.io --domains "demo.lcubestudios.io" 
 
 EXPOSE 80
 EXPOSE 443
