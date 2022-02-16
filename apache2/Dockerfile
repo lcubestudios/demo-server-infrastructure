@@ -28,5 +28,5 @@ COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
 #RUN apt install certbot python3-certbot-apache -y 
 #RUN certonly -a standalone  --agree-tos  --non-interactive --dry-run --email luismunoz@lcubestudios.io --domains "demo.lcubestudios.io" 
 
-#EXPOSE 80
-EXPOSE 443
+EXPOSE 80
+#EXPOSE 443
