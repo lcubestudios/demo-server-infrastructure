@@ -20,5 +20,6 @@ RUN apt install -y python3-pip
 RUN pip3 install requests 
 RUN apt install -y build-essential libssl-dev libffi-dev python3-dev
 RUN apt install -y libapache2-mod-php openssl php-imagick php-common php-curl php-gd php-imap php-intl php-json php-ldap php-mbstring php-pgsql php-ssh2 php-xml php-zip unzip
+RUN add @agentofuser/ipfs-deploy
 
 EXPOSE 80
