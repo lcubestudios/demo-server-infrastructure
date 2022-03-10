@@ -5,7 +5,7 @@ RUN apt-get -y upgrade
 ENV MAIN_DIR=/var/www/html
 WORKDIR ${MAIN_DIR}
 
-RUN apt-get install -y git
+RUN apt-get install -y git nano
 RUN apt-get install -y ca-certificates \
   && apt-get install -y curl gnupg build-essential \
   && curl --silent --location https://deb.nodesource.com/setup_14.x | bash - \
@@ -21,5 +21,13 @@ RUN pip3 install requests
 RUN apt install -y build-essential libssl-dev libffi-dev python3-dev
 RUN apt install -y libapache2-mod-php openssl php-imagick php-common php-curl php-gd php-imap php-intl php-json php-ldap php-mbstring php-pgsql php-ssh2 php-xml php-zip unzip
 RUN add @agentofuser/ipfs-deploy
+RUN a2enmod cgi
+RUN pip3 install psycopg2-binary
+
+COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
+
+RUN apt install certbot python3-certbot-apache -y 
+#RUN certonly -a standalone  --agree-tos  --non-interactive --dry-run --email luismunoz@lcubestudios.io --domains "demo.lcubestudios.io" 
 
 EXPOSE 80
+#EXPOSE 443
