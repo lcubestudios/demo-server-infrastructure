@@ -1,0 +1,125 @@
+<IfModule mod_ssl.c>
+<VirtualHost *:443>
+        # The ServerName directive sets the request scheme, hostname and port that
+        # the server uses to identify itself. This is used when creating
+        # redirection URLs. In the context of virtual hosts, the ServerName
+        # specifies what hostname must appear in the request's Host: header to
+        # match this virtual host. For the default virtual host (this file) this
+        # value is not decisive as it is used as a last resort host regardless.
+        # However, you must set it for any further virtual host explicitly.
+        #ServerName www.example.com
+
+        ServerAdmin admin@lcubestudios.io
+        DocumentRoot /var/www/html/master
+
+        <Directory />
+                Options FollowSymLinks
+                AllowOverride None
+        </Directory>
+
+        <Directory /var/www/html/master>
+                # Options Indexes FollowSymLinks MultiViews
+                Options FollowSymLinks
+                AllowOverride All
+                Order allow,deny
+                allow from all
+        </Directory>
+
+        <Directory "/var/www/html/master">
+                Options +ExecCGI
+                AddHandler cgi-script .py
+        </Directory>
+
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+
+ServerName demo.lcubestudios.io
+Include /etc/letsencrypt/options-ssl-apache.conf
+SSLCertificateFile /etc/letsencrypt/live/demo.lcubestudios.io/fullchain.pem
+SSLCertificateKeyFile /etc/letsencrypt/live/demo.lcubestudios.io/privkey.pem
+</VirtualHost>
+
+<VirtualHost *:443>
+        # The ServerName directive sets the request scheme, hostname and port that
+        # the server uses to identify itself. This is used when creating
+        # redirection URLs. In the context of virtual hosts, the ServerName
+        # specifies what hostname must appear in the request's Host: header to
+        # match this virtual host. For the default virtual host (this file) this
+        # value is not decisive as it is used as a last resort host regardless.
+        # However, you must set it for any further virtual host explicitly.
+        #ServerName www.example.com
+
+        ServerAdmin admin@lcubestudios.io
+        DocumentRoot /var/www/html/dev
+
+        <Directory />
+                Options FollowSymLinks
+                AllowOverride None
+        </Directory>
+
+        <Directory /var/www/html/dev>
+                # Options Indexes FollowSymLinks MultiViews
+                Options FollowSymLinks
+                AllowOverride All
+                Order allow,deny
+                allow from all
+        </Directory>
+
+        <Directory "/var/www/html/dev">
+                Options +ExecCGI
+                AddHandler cgi-script .py
+        </Directory>
+
+        ErrorLog ${APACHE_LOG_DIR}/error_dev.log
+        CustomLog ${APACHE_LOG_DIR}/access_dev.log combined
+
+
+ServerName demo-dev.lcubestudios.io
+SSLCertificateFile /etc/letsencrypt/live/demo.lcubestudios.io/fullchain.pem
+SSLCertificateKeyFile /etc/letsencrypt/live/demo.lcubestudios.io/privkey.pem
+
+Include /etc/letsencrypt/options-ssl-apache.conf
+</VirtualHost>
+
+<VirtualHost *:443>
+        # The ServerName directive sets the request scheme, hostname and port that
+        # the server uses to identify itself. This is used when creating
+        # redirection URLs. In the context of virtual hosts, the ServerName
+        # specifies what hostname must appear in the request's Host: header to
+        # match this virtual host. For the default virtual host (this file) this
+        # value is not decisive as it is used as a last resort host regardless.
+        # However, you must set it for any further virtual host explicitly.
+        #ServerName www.example.com
+
+        ServerAdmin admin@lcubestudios.io
+        DocumentRoot /var/www/html/staging
+
+        <Directory />
+                Options FollowSymLinks
+                AllowOverride None
+        </Directory>
+
+        <Directory /var/www/html/staging>
+                # Options Indexes FollowSymLinks MultiViews
+                Options FollowSymLinks
+                AllowOverride All
+                Order allow,deny
+                allow from all
+        </Directory>
+
+        <Directory "/var/www/html/staging">
+                Options +ExecCGI
+                AddHandler cgi-script .py
+        </Directory>
+
+        ErrorLog ${APACHE_LOG_DIR}/error_staging.log
+        CustomLog ${APACHE_LOG_DIR}/access_staging.log combined
+
+
+ServerName demo-staging.lcubestudios.io
+SSLCertificateFile /etc/letsencrypt/live/demo.lcubestudios.io/fullchain.pem
+SSLCertificateKeyFile /etc/letsencrypt/live/demo.lcubestudios.io/privkey.pem
+Include /etc/letsencrypt/options-ssl-apache.conf
+</VirtualHost>
+</IfModule>
